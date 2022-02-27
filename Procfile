@@ -1,0 +1,1 @@
+web: gunicorn coop_backend.wsgi
