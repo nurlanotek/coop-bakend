@@ -17,7 +17,7 @@ Author: Arir Allana
 
 Project Supervisor: Dr. Nurlan Shaidullaev
 
-Link to Deployed Server:
+Link to Deployed Server: https://coop-bakend.herokuapp.com/
 
 Software Details: Django, Postgre
 
