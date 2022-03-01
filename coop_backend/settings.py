@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'coop_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'USERS',
-        'USER': 'postgres',
-        'PASSWORD': 'arir',
-        'HOST': 'localhost',
-        'PORT':'5433'
+        'NAME': 'dbs3vmc154f9n3',
+        'USER': 'idasvbjdttexeo',
+        'PASSWORD': 'cc2933a4268d7247902b3a320cb5490ad953c27b96a1c85c80e8a5985167a9db',
+        'HOST': 'ec2-3-219-204-29.compute-1.amazonaws.com',
+        'PORT':'5432'
     }
 }
 
