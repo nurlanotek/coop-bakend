@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 def login(request):
+
     if request.method == 'POST':
         username1 = request.POST['username']
         password1 = request.POST['password']
@@ -19,3 +20,9 @@ def login(request):
     else:
         return render(request,'login.html')
 
+def signup(request):
+    return render(request,'signup.html')
+
+
+def home(request):
+    return render(request,'home.html')

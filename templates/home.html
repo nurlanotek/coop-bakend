@@ -1,12 +1,158 @@
-<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-<h1>Home</h1>
-<a href="signup/signup">SignUp</a>
-<a href="login/login">Login</a>
-</body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+    <title></title>
+  </head>
+  <body>
+
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="site-logo col-6"><a href="home.html">UCA CO-OP</a></div>
+
+          <nav class="mx-auto site-navigation">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+              <li><a href="home.html" class="nav-link active">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li>
+                <a href="job.html#joblist">Job List</a>
+              </li>
+              <li class="has-children">
+                <a href="services.html">Pages</a>
+                <ul class="dropdown">
+                  <li><a href="services.html">Services</a></li>
+                  <li><a href="service-single.html">Service Single</a></li>
+                  <li><a href="blog-single.html">Blog Single</a></li>
+                  <li><a href="portfolio.html">Portfolio</a></li>
+                  <li><a href="portfolio-single.html">Portfolio Single</a></li>
+                  <li><a href="testimonials.html">Testimonials</a></li>
+                  <li><a href="faq.html">Frequently Ask Questions</a></li>
+                  <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+              </li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a Job</a></li>
+              <li class="d-lg-none"><a href="login.html">Log In</a></li>
+            </ul>
+          </nav>
+
+          <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+            <div class="ml-auto">
+              <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
+              <a href="{% url 'login' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a>
+            </div>
+            <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span class="icon-menu h3 m-0 p-0 mt-2"></span></a>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+
+    <div class="hero" style="background-image: url('/static/images/image1.jpg');"></div>
+
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px;" id="about">
+      <h2 class="w3-wide">About Us</h2>
+      <p style="color: black;" class="w3-opacity"><i>What is CO-OP?</i></p>
+      <p style="color: black;" class="w3-justify">The Co-operative Education Program is a work integrated learning program where students apply in-class learning to real life professional experiences within the field of study across private, public, and community-based sectors. This program prepares students for both academic and career success beyond university. UCA’s Co-op Program has been developed in partnership with the University of Victoria, Canada.
+        The major characteristics of a Co-operative education program include (1) a sequence of work and academic periods, (2) monetary compensation for the work done, which maintains both employer and student engagement, (3) an evaluation of the student’s and employer’s performance over the course of the work term; and (4) faculty engagement in the cooperative education program. In cooperative education programs, the work of the student is supervised by an employer and monitored by the academic institution.</p>
+      <div class="w3-row w3-padding-32">
+        <div class="w3-third">
+          <p>Myrza Karimov</p>
+          <img src="{% static 'images/image3.jpg'%}" class="w3-round w3-margin-bottom" style="width:60%">
+        </div>
+        <div class="w3-third">
+          <p>Myrza Karimov</p>
+          <img src="{% static 'images/image3.jpg'%}" class="w3-round w3-margin-bottom" style="width:60%">
+        </div>
+        <div class="w3-third">
+          <p>Myrza Karimov</p>
+          <img src="{% static 'images/image3.jpg'%}" class="w3-round" style="width:60%">
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-row w3-padding-64">
+      <div class="w3-col m6 w3-padding-large w3-hide-small">
+       <img src="{% static 'images/image4.jfif'%}" class="w3-round w3-image" alt="Table Setting" width="600" height="850">
+      </div>
+
+      <div class="w3-col m6 w3-padding-large">
+        <h2 class="w3-wide">Why do we need CO-OP?</h2><br>
+        <p class="w3-large w3-text-grey w3-hide-medium">The Co-operative Education Program is a work integrated learning program where students apply in-class learning to real life professional experiences within the field of study across private, public, and community-based sectors. This program prepares students for both academic and career success beyond university. UCA’s Co-op Program has been developed in partnership with the University of Victoria, Canada.</p>
+        <p class="w3-large w3-text-grey w3-hide-medium">The major characteristics of a Co-operative education program include (1) a sequence of work and academic periods, (2) monetary compensation for the work done, which maintains both employer and student engagement, (3) an evaluation of the student’s and employer’s performance over the course of the work term; and (4) faculty engagement in the cooperative education program.</p>
+      </div>
+    </div>
+
+      <div id="contact" style="background-color: rgb(161, 158, 158);">
+      <div class="w3-container w3-content w3-padding-64" style="max-width:800px;" id="contact">
+        <h2 class="w3-wide w3-center">CONTACT</h2>
+        <div class="w3-row w3-padding-32">
+          <div class="w3-col m6 w3-large w3-margin-bottom">
+            <i class="fa fa-map-marker" style="width:30px;"></i> Naryn, KG<br>
+            <i class="fa fa-phone" style="width:30px"></i> Phone: +00 151515<br>
+            <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+          </div>
+          <div class="w3-col m6">
+            <form action="" target="_blank">
+              <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+                <div class="w3-half">
+                  <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+                </div>
+                <div class="w3-half">
+                  <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                </div>
+              </div>
+              <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+              <button class="btn btn-primary-button w3-section w3-right" type="submit">SEND</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+
+
+
+
+    <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/jquery.sticky.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+  </body>
 </html>
