@@ -31,7 +31,7 @@
             <form action="{% url 'login' %}" method="POST">
                 {%csrf_token%}
               <div class="inputBox">
-                <input type="userid" name="userid" required onkeyup="this.setAttribute('value', this.value);" value="">
+                <input type="userid" name="username" required onkeyup="this.setAttribute('value', this.value);" value="">
                 <label>UserID</label>
               </div>
               <div class="inputBox">
