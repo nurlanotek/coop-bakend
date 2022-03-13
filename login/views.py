@@ -14,7 +14,7 @@ def login(request):
 
         if x is None:
             auth.login(request,x)
-            return redirect('login')
+            return render(request,'login.html')
         else:
             return render(request,'profile_page.html')
     else:
