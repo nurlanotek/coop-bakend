@@ -12,11 +12,11 @@ def login(request):
 
         x = auth.authenticate(username=username1, password=password1)
 
-        if x is None:
+        if x is not None:
             auth.login(request,x)
-            return render(request,'login.html')
-        else:
             return render(request,'profile_page.html')
+        else:
+            return render(request,'login.html')
     else:
         return render(request,'login.html')
 
