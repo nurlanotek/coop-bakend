@@ -1,10 +1,160 @@
-<!DOCTYPE html>
+
+{% load static %}
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
-<body>
-<h1>Profile</h1>
-</body>
-</html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+
+    <link rel="stylesheet" href="{% static 'https://www.w3schools.com/w3css/4/w3.css'%}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+    <title></title>
+  </head>
+  <body>
+
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="site-logo col-6"><a href="{% url 'home' %}">UCA CO-OP</a></div>
+
+          <nav class="mx-auto site-navigation">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="index.html#about">About</a></li>
+              <li>
+                <a href="job.html#joblist" class="nav-link active">Job List</a>
+              </li>
+              <li class="has-children">
+                <a href="">Pages</a>
+                <ul class="dropdown">
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="service-single.html">Service Single</a></li>
+                  <li><a href="blog-single.html">Blog Single</a></li>
+                  <li><a href="portfolio.html">Portfolio</a></li>
+                  <li><a href="portfolio-single.html">Portfolio Single</a></li>
+                  <li><a href="testimonials.html">Testimonials</a></li>
+                  <li><a href="faq.html">Frequently Ask Questions</a></li>
+                  <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+              </li>
+              <li><a href="alumnus.html#alumnus">Alumnus</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a Job</a></li>
+              <li class="d-lg-none"><a href="login.html">Log In</a></li>
+            </ul>
+          </nav>
+          
+          <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+            <div class="ml-auto">
+              <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
+              <a href="{% url 'home' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+            </div>
+            <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span class="icon-menu h3 m-0 p-0 mt-2"></span></a>
+          </div>
+
+        </div>
+      </div>
+    </header>
+
+    <div class="hero" style="background-image: url('images/image1.jpg');"></div>
+
+    <button type="button" class="btn btn-dark btn-floating btn-lg"id="btn-back-to-top">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+      </svg>
+    </button>
+
+    <div id="profile" class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="text-right">Profile</h4>
+                    </div>
+                   
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Name</label><h5>Edogaru</h5><hr></div>
+                        <div class="col-md-12"><label class="labels">Student ID</label><h5>552511</h5><hr></div>
+                        <div class="col-md-12"><label class="labels">Major</label><h5>Computer Science</h5><hr></div>
+                        <div class="col-md-12"><label class="labels">Email</label><h5>edogaru@mail.com.my</h5><hr></div>
+                        <div class="col-md-12"><label class="labels">Phone Num.</label><h5>+996556040905</h5><hr></div>
+                    </div>
+                   
+                    <div class="mt-5 text-center"><a href="editprofile.html#profile"><button class="btn btn-primary profile-button" type="button">Edit Profile</button></a></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center experience"><span>CO-OP Progress</span></div><br>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div id="contact" style="background-color: rgb(161, 158, 158);">
+        <div class="w3-container w3-content w3-padding-64" style="max-width:800px;" id="contact">
+          <h2 class="w3-wide w3-center">CONTACT</h2>
+          <div class="w3-row w3-padding-32">
+            <div class="w3-col m6 w3-large w3-margin-bottom">
+              <i class="fa fa-map-marker" style="width:30px;"></i> Naryn, KG<br>
+              <i class="fa fa-phone" style="width:30px"></i> Phone: +00 151515<br>
+              <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+            </div>
+            <div class="w3-col m6">
+              <form action="/action_page.php" target="_blank">
+                <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+                  <div class="w3-half">
+                    <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+                  </div>
+                  <div class="w3-half">
+                    <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                  </div>
+                </div>
+                <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+                <button class="btn btn-primary-button w3-section w3-right" type="submit">SEND</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>    

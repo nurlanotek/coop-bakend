@@ -6,3 +6,7 @@ from django.shortcuts import render, redirect
 
 def profile_page(request):
     return render(request, 'profile_page.html')
+
+
+def home(request):
+    return render(request, 'home.html')

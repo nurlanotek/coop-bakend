@@ -1,5 +1,5 @@
-{% load static %}
 
+{% load static %}
 <!doctype html>
 <html lang="en">
     <head>
@@ -10,7 +10,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href=" {% static 'fonts/icomoon/style.css'%}">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'%}">
 
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
 
@@ -31,7 +31,7 @@
             <form action="{% url 'login' %}" method="POST">
                 {%csrf_token%}
               <div class="inputBox">
-                <input type="userid" name="username" required onkeyup="this.setAttribute('value', this.value);" value="">
+                <input type="userid" name="userid" required onkeyup="this.setAttribute('value', this.value);" value="">
                 <label>UserID</label>
               </div>
               <div class="inputBox">
@@ -41,7 +41,7 @@
                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                 <label>Password</label>
               </div>
-                <input type="submit" class="btn btn-primary" value="Login"></span>
+              <input type="submit" class="btn btn-primary" value="Login">
 
               <a href="{% url 'signup' %}" class="btn btn-primary1">Sign Up</a>
             </form>
