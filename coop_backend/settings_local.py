@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os.path
 from pathlib import Path
-
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import django_heroku
+from django.core.mail.backends import smtp
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -136,3 +137,16 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
+
+MESSAGE_TAGS = {
+    messages.ERROR :'danger'
+}
+
+#Email stuff
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ucaco4350@gmail.com'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'ucaco4350@gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = 'uca#coop@549'

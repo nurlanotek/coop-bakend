@@ -1,5 +1,6 @@
 from django.contrib import auth
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Create your views here.
 from django.http import HttpResponse
@@ -16,6 +17,7 @@ def login(request):
             auth.login(request,x)
             return render(request,'profile_page.html')
         else:
+            messages.error(request, 'Incorrect credentials.')
             return render(request,'login.html')
     else:
         return render(request,'login.html')

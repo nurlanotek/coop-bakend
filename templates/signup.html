@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 <!doctype html>
 <html lang="en">
     <head>
@@ -28,6 +29,7 @@
             <h2>Signup</h2>
             <form action="{% url 'Signup' %}" method="POST">
                 {% csrf_token %}
+                {% include 'partials/_messages.html' %}
               <div class="inputBox">
                 <input type="text" name="username" required onkeyup="this.setAttribute('value', this.value);" value="">
                 <label>UserID</label>
@@ -56,8 +58,8 @@
                 <label>Password</label>
               </div>
 
-              <input type="submit" class="btn btn-primary" value="Sign Up">
-                <a href="{% url 'login' %}" class="btn btn-primary1">Log In</a>
+              <input type="submit" class="btn btn-primary" value="Sign Up" style="float:left; display: inline;">
+                <a href="{% url 'login' %}" class="btn btn-primary1" style="float:right ; display: inline;" >Log In</a>
             </form>
 
           </div>
