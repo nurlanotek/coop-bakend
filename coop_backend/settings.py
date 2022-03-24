@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure--gegh6w24he1%qagic*$qta_1+1u7+c8c&9u6uojusrl)f+op)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,10 +88,10 @@ WSGI_APPLICATION = 'coop_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_USER_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
+        'NAME': 'dbs3vmc154f9n3',
+        'USER': 'idasvbjdttexeo',
+        'PASSWORD': 'cc2933a4268d7247902b3a320cb5490ad953c27b96a1c85c80e8a5985167a9db',
+        'HOST': 'ec2-3-219-204-29.compute-1.amazonaws.com',
         'PORT':'5432'
     }
 }
@@ -151,9 +151,9 @@ MESSAGE_TAGS = {
 
 #Email stuff
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "ucaco4350@gmail.com"
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = "ucaco4350@gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = "uca#coop@549"
