@@ -21,35 +21,36 @@ def signup(request):
         email = request.POST['email_id']
         password = request.POST['password']
 
-        if not User.objects.filter(username=username).exists():
-            if not User.objects.filter(email=email).exists():
-                user = User.objects.create_user(username=username, first_name=firstname, last_name=lastname, email=email, password=password)
-                user.is_active = False
-                user.save()
-
-                domain = get_current_site(request).domain
-                email_subject = 'Activate your Account'
-                email_body = render_to_string("activate.html",
-                                              {
-                                                'user':user,
-                                                'domain':domain,
-                                                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                                                'token': token_generator.make_token(user)
-                                              }
-                                              )
-                send_mail(
-                    email_subject,
-                    email_body,
-                    'ucaco4350@gmail.com',
-                    [str(email)],
-                    fail_silently=False
-                )
-                success_message = 'Verification email sent to ' + str(email)
-                messages.success(request, success_message)
-                return render(request,'login.html')
-        else:
+        if  User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
             messages.error(request, 'UserID or Email already in use.')
             return render(request, 'signup.html')
+
+        else:
+            user = User.objects.create_user(username=username, first_name=firstname, last_name=lastname, email=email,
+                                            password=password)
+            user.is_active = False
+            user.save()
+
+            domain = get_current_site(request).domain
+            email_subject = 'Activate your Account'
+            email_body = render_to_string("activate.html",
+                                          {
+                                              'user': user,
+                                              'domain': domain,
+                                              'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                              'token': token_generator.make_token(user)
+                                          }
+                                          )
+            send_mail(
+                email_subject,
+                email_body,
+                'ucaco4350@gmail.com',
+                [str(email)],
+                fail_silently=False
+            )
+            success_message = 'Verification email sent to ' + str(email)
+            messages.success(request, success_message)
+            return render(request, 'login.html')
 
     else:
         return render(request,'signup.html')
