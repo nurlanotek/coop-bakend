@@ -50,16 +50,20 @@
               <li><a href="{% url 'home' %}" class="nav-link active">Home</a></li>
               <li><a href="{% anchor 'home' 'about' %}">About</a></li>
               <li>
-                <a href="{% anchor 'job' 'joblist' %}">Job List</a>
+                  {% if request.user.is_authenticated %}
+                      <a href="{% anchor 'job' 'joblist' %}">Job List</a>
+                  {% endif %}
               </li>
               <li class="has-children">
                 <a href="">Pages</a>
                 <ul class="dropdown">
-                  <li><a href="{% anchor 'profile' 'profile' %}">Profile</a></li>
-                  <li><a href="#">Service Single</a></li>
-                  <li><a href="#">Blog Single</a></li>
-                  <li><a href="#">Portfolio</a></li>
-                  <li><a href="#">Portfolio Single</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% anchor 'profile' 'profile' %}">Profile</a></li>
+                        <li><a href="#">Service Single</a></li>
+                        <li><a href="#">Blog Single</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Portfolio Single</a></li>
+                    {% endif %}
                   <li><a href="#">Testimonials</a></li>
                   <li><a href="#">Frequently Ask Questions</a></li>
                   <li><a href="#">Gallery</a></li>
@@ -67,15 +71,30 @@
               </li>
               <li><a href="#">Alumnus</a></li>
               <li><a href="{% anchor 'home' 'contact' %}">Contact</a></li>
-              <li class="d-lg-none"><a href="{% anchor 'postjob' 'postjob' %}"><span class="mr-2">+</span> Post a Job</a></li>
-              <li class="d-lg-none"><a href="{% url 'login' %}">Log In</a></li>
+                {% if request.user.is_authenticated %}
+                    {% if request.user|has_group:"co-op" %}
+                        <li class="d-lg-none"><a href="{% anchor 'postjob' 'postjob' %}"><span class="mr-2">+</span> Post a Job</a></li>
+                    {% endif %}
+                    <li class="d-lg-none"><a href="{% url 'logout' %}">Log Out</a></li>
+                {% else %}
+                    <li class="d-lg-none"><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
+
             </ul>
           </nav>
 
           <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
-              <a href="{% anchor 'postjob' 'postjob'%}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
-              <a href="{% url 'login' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a>
+                {% if request.user.is_authenticated %}
+                    {% if request.user|has_group:"co-op" %}
+                        <a href="{% anchor 'postjob' 'postjob'%}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block" style="background-color: #f44336;color:white;"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Sign Up</a>
+                    <a href="{% url 'login' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a>
+                {% endif %}
+
             </div>
             <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span class="icon-menu h3 m-0 p-0 mt-2"></span></a>
           </div>

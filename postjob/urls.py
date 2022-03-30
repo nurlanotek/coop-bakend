@@ -5,6 +5,7 @@ from . import  views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',views.home, name='home'),
-    path('postjob',views.postjob, name='postjob')
+    path('postjob/',views.postjob, name='postjob'),
+    path('logout', views.logout_user, name='logout')
 
 ]

@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import authenticate, login as auth_login
 
 # Create your views here.
 from django.http import HttpResponse
@@ -8,19 +9,22 @@ from django.http import HttpResponse
 def login(request):
 
     if request.method == 'POST':
-        username1 = request.POST['username']
-        password1 = request.POST['password']
+        username = request.POST['username']
+        password = request.POST['password']
 
-        x = auth.authenticate(username=username1, password=password1)
+        user = auth.authenticate(username=username, password=password)
 
-        if x is not None:
-            auth.login(request,x)
-            return render(request,'profile_page.html')
+        print(user.is_authenticated, request.user.is_authenticated)
+        if user is not None:
+            if user.is_active:
+                auth_login(request, user)
+                print(user.is_authenticated, request.user.is_authenticated)
+                return render(request,'profile_page.html')
         else:
             messages.error(request, 'Incorrect credentials.')
             return render(request,'login.html')
     else:
-        return render(request,'login.html')
+        return render(request, 'login.html')
 
 def signup(request):
     return render(request,'signup.html')

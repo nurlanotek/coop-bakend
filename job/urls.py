@@ -7,5 +7,6 @@ urlpatterns = [
     path('home/',views.home, name='home'),
     path('job',views.job, name='job'),
     path('profile_page/', include('profile_page.urls')),
-    path('postjob/', include('postjob.urls'))
+    path('postjob/', include('postjob.urls')),
+    path('logout', views.logout_user, name='logout')
 ]
