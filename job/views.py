@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.template import RequestContext
 from django.contrib.auth import logout
+from app1.models import Job
 
 # Create your views here.
 def job(request):
@@ -12,3 +13,5 @@ def home(request):
 def logout_user(request):
     logout(request)
     return render(request, 'home.html')
+
+

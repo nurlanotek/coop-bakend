@@ -14,11 +14,9 @@ def login(request):
 
         user = auth.authenticate(username=username, password=password)
 
-        print(user.is_authenticated, request.user.is_authenticated)
         if user is not None:
             if user.is_active:
                 auth_login(request, user)
-                print(user.is_authenticated, request.user.is_authenticated)
                 return render(request,'profile_page.html')
         else:
             messages.error(request, 'Incorrect credentials.')
