@@ -94,7 +94,9 @@
     <div id="joblist" class="container">
         <div class="row height d-flex justify-content-center align-items-center">
             <div class="col-md-10">
-                <div class="search"> <i class="fa fa-search"></i> <input type="text" class="w3-input w3-border" placeholder="Search for any job"> <button class="btn btn-primary-button">Search</button> </div>
+                <form method='GET' action='{% url 'search' %}'>
+                <div class="search"> <i class="fa fa-search"></i> <input type="text" name="q" class="w3-input w3-border" placeholder="Search for any job" value='{{ request.GET.q }}'> <button type="submit" class="btn btn-primary-button">Search</button> </div>
+                </form>
             </div>
         </div>
     </div>
@@ -105,82 +107,26 @@
 
             <!-- List group-->
             <ul class="list-group shadow">
-
+                {% for job in jobs.all %}
               <!-- list group item-->
               <li class="list-group-item">
                 <!-- Custom content-->
                 <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                   <div class="media-body order-2 order-lg-1">
-                    <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-                    <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
+                    <h5 class="mt-0 font-weight-bold mb-2">{{ job.title }}</h5>
+                    <p class="font-italic text-muted mb-0 small">{{ job.description }}</p>
                     <div class="d-flex align-items-center justify-content-between mt-1">
                       <button type="button" class="btn btn-outline-danger">Apply</button>
                       <ul class="list-inline small">
-                        <h6 class="font-weight-bold my-2">$220.00</h6>
+                        <h6 class="font-weight-bold my-2">{{ job.payment }}</h6>
                       </ul>
                     </div>
-                  </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-4_vgfjy9.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                  </div><img src="{{ job.job_img.url }}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                 </div>
                 <!-- End -->
               </li>
               <!-- End -->
-
-              <!-- list group item-->
-              <li class="list-group-item">
-                <!-- Custom content-->
-                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                  <div class="media-body order-2 order-lg-1">
-                    <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-                    <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-                    <div class="d-flex align-items-center justify-content-between mt-1">
-                      <button type="button" class="btn btn-outline-danger">Apply</button>
-                      <ul class="list-inline small">
-                        <h6 class="font-weight-bold my-2">$220.00</h6>
-                      </ul>
-                    </div>
-                  </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-4_vgfjy9.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                </div>
-                <!-- End -->
-              </li>
-              <!-- End -->
-
-              <!-- list group item -->
-              <li class="list-group-item">
-                <!-- Custom content-->
-                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                  <div class="media-body order-2 order-lg-1">
-                    <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-                    <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-                    <div class="d-flex align-items-center justify-content-between mt-1">
-                      <button type="button" class="btn btn-outline-danger">Apply</button>
-                      <ul class="list-inline small">
-                        <h6 class="font-weight-bold my-2">$220.00</h6>
-                      </ul>
-                    </div>
-                  </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-4_vgfjy9.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                </div>
-                <!-- End -->
-              </li>
-              <!-- End -->
-
-              <!-- list group item -->
-              <li class="list-group-item">
-                <!-- Custom content-->
-                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                  <div class="media-body order-2 order-lg-1">
-                    <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-                    <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-                    <div class="d-flex align-items-center justify-content-between mt-1">
-                      <button type="button" class="btn btn-outline-danger">Apply</button>
-                      <ul class="list-inline small">
-                        <h6 class="font-weight-bold my-2">$220.00</h6>
-                      </ul>
-                    </div>
-                  </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-4_vgfjy9.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                </div>
-                <!-- End -->
-              </li>
-              <!-- End -->
+                {% endfor %}
             </ul>
             <!-- End -->
           </div>
