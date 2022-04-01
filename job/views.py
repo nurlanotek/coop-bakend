@@ -24,3 +24,4 @@ def search(request):
     return render(request, 'job.html', { 'jobs':results })
 
 
+
