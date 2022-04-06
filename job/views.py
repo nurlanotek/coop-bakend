@@ -18,9 +18,7 @@ def showjobs(request):
 
 def search(request):
     query = request.GET.get('q')
-    print(query)
-    results = Job.objects.filter(Q(title__contains=query) | Q(description__contains=query) | Q(payment__contains=query))
-    print(results)
+    results = Job.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(payment__icontains=query))
     return render(request, 'job.html', { 'jobs':results })
 
 

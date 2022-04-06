@@ -4,15 +4,18 @@ from datetime import date,time
 
 # Create your models here.
 class Student(models.Model):
-    name=models.CharField('Name',max_length=255)
-    email=models.CharField('Email',max_length=255)
-    phone=models.IntegerField('Phone')
-    stdid=models.IntegerField('StudentID')
-    major=models.CharField('Major',max_length=255)
-    year=models.IntegerField('Year')
+    firstname=models.CharField('First Name',max_length=255,default='')
+    lastname=models.CharField('Last Name',max_length=255, default='')
+    email=models.CharField('Email',max_length=255,default='')
+    phone=models.IntegerField('Phone', null=True, blank=True)
+    stdid=models.IntegerField('StudentID',null=True, blank=True)
+    major=models.CharField('Major',max_length=255,default='')
+    gpa=models.FloatField('GPA', null=True, blank=True)
+    profile_img = models.ImageField('Profile Image', null=True, blank=True, upload_to="profile_img/")
+    activated = models.BooleanField('User Activated',default=False)
 
     def __str__(self):
-        return self.name
+        return self.lastname
 
 class Job(models.Model):
     title = models.CharField('Title',max_length=255)

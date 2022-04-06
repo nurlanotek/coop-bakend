@@ -50,6 +50,20 @@
                 <label>Email</label>
               </div>
 
+                <div class="inputBox">
+                <input type="text" name="major" list="major" required onkeyup="this.setAttribute('value', this.value);" value="">
+                <label>Major</label>
+                <datalist id="major">
+                  <option value="Computer Science">
+                  <option value="Communications and Media">
+                </datalist>
+              </div>
+
+              <div class="inputBox">
+                <input type="text" name="phone" required onkeyup="this.setAttribute('value', this.value);" value="">
+                <label>Phone Number</label>
+              </div>
+
               <div class="inputBox">
                 <input type="password" name="password" required value=""
                        onkeyup="this.setAttribute('value', this.value);"

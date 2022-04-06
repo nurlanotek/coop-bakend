@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from django.contrib.auth.models import Group
 
 # Create your views here.
 from django.views import View
@@ -10,6 +11,8 @@ from django.utils.encoding import force_bytes,force_text,DjangoUnicodeDecodeErro
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
+
+from app1.models import Student
 from .utils import token_generator
 from django.template.loader import render_to_string
 
@@ -19,6 +22,8 @@ def signup(request):
         firstname = request.POST['first_name']
         lastname = request.POST['last_name']
         email = request.POST['email_id']
+        major = request.POST['major']
+        phone = request.POST['phone']
         password = request.POST['password']
 
         if  User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
@@ -30,6 +35,11 @@ def signup(request):
                                             password=password)
             user.is_active = False
             user.save()
+            group = Group.objects.get(name='student')
+            user.groups.add(group)
+
+            student = Student(firstname=firstname, lastname=lastname, email=email,phone=phone,major=major)
+            student.save()
 
             domain = get_current_site(request).domain
             email_subject = 'Activate your Account'
@@ -68,12 +78,21 @@ class ActivateAccountView(View):
         try:
             uid = force_text((urlsafe_base64_decode(uidb64)))
             user = User.objects.get(pk=uid)
+
         except Exception as identifier:
             user=None
 
         if user is not None and token_generator.check_token(user,token):
             user.is_active=True
             user.save()
+
+            user_email = getattr(user, 'email')
+            print(user_email)
+            student = Student.objects.get(email=user_email)
+            student.activated = True
+            student.save()
+
             messages.add_message(request,messages.INFO,'account successfully activated')
             return render(request, 'login.html')
+
         return render(request, 'activate_failed.html', status=401)
