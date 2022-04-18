@@ -1,7 +1,12 @@
 from django.contrib.auth import logout
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your views here.
+from app1.models import Student
+
+
 def home(request):
     return render(request, 'home.html')
 
@@ -20,4 +25,8 @@ def login(request):
 
 
 def editprofile(request):
-    return render(request, 'editprofile.html')
+    email = request.user.email
+    print(email)
+    profile_info = Student.objects.filter(Q(email__contains=email))
+    print(profile_info)
+    return render(request, 'editprofile.html', {'profile_info':profile_info})
