@@ -26,7 +26,5 @@ def logout_user(request):
 
 def editprofile(request):
     email = request.user.email
-    print(email)
     profile_info = Student.objects.filter(Q(email__contains=email))
-    print(profile_info)
     return render(request, 'editprofile.html', {'profile_info':profile_info})
