@@ -21,7 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',views.home, name='home'),
     path('editprofile',views.editprofile, name='editprofile'),
-    path('login/',views.login, name='login'),
     path('save',views.save, name='save'),
     path('profile_page/',include('profile_page.urls')),
     path('job/', include('job.urls')),

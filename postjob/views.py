@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 # Create your views here.
-from app1.models import Job
+from app1.models import Job, Student
 
 
 def postjob(request):

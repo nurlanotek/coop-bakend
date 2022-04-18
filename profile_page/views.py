@@ -10,9 +10,7 @@ from django.db.models import Q
 
 def profile_page(request):
     email = request.user.email
-    print(email)
     profile_info = Student.objects.filter(Q(email__contains=email))
-    print(profile_info)
     return render(request, 'profile_page.html', {'profile_info':profile_info})
 
 def home(request):
