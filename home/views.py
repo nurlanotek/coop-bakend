@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.contrib.auth import logout
 
@@ -19,3 +20,7 @@ def logout_user(request):
     logout(request)
     return render(request, 'home.html')
 
+def profile(request):
+    email = request.user.email
+    profile_info = Student.objects.filter(Q(email__contains=email))
+    return render(request, 'profile_page.html', {'profile_info': profile_info})

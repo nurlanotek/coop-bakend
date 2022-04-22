@@ -11,5 +11,6 @@ urlpatterns = [
     path('search',views.search, name='search'),
     path('profile_page/', include('profile_page.urls')),
     path('postjob/', include('postjob.urls')),
+    path('profile',views.profile, name='profile'),
     path('logout', views.logout_user, name='logout'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

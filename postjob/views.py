@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
@@ -41,3 +42,8 @@ def addjob(request):
         messages.success(request, success_message)
 
         return render(request, 'postjob.html')
+
+def profile(request):
+    email = request.user.email
+    profile_info = Student.objects.filter(Q(email__contains=email))
+    return render(request, 'profile_page.html', {'profile_info': profile_info})

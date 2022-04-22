@@ -10,9 +10,14 @@
 
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
     <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'%}">
 
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
@@ -21,6 +26,7 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="{% static  'css/style.css' %}">
+
 
     <title></title>
   </head>
@@ -41,7 +47,7 @@
     <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="{% url 'home' %}">UCA CO-OP</a></div>
+          <div class="site-logo col-6"><a href="index.html">UCA CO-OP</a></div>
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
@@ -70,10 +76,11 @@
 
           <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
-                {% if request.user|has_group:"co-op" %}
-                    <a href="{% anchor 'postjob' 'postjob' %}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
-                {% endif %}
-                <a href="{% url 'logout' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block" style="background-color: #f44336;color:white;"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+			{% if request.user|has_group:"co-op" %}
+              <a href="{% anchor 'postjob' 'postjob' %}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
+              {% endif %}
+			  <a href="{% url 'logout' %}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+              <a href="{% url 'profile' %}" class="btn btn-outline-white1 border-width-2 d-none d-lg-inline-block"><span class="bi bi-person-fill"> </span></a>
             </div>
             <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span class="icon-menu h3 m-0 p-0 mt-2"></span></a>
           </div>
@@ -85,125 +92,296 @@
 
     <div class="hero" style="background-image: url('/static/images/image1.jpg');"></div>
 
-    <button type="button" class="btn btn-dark btn-floating btn-lg"id="btn-back-to-top">
+    <button style="z-index: 100;" type="button" class="btn btn-dark btn-floating btn-lg"id="btn-back-to-top">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
       </svg>
     </button>
 
-    <div id="joblist" class="container">
-        <div class="row height d-flex justify-content-center align-items-center">
-            <div class="col-md-10">
-                <form method='GET' action='{% url 'search' %}'>
-                <div class="search"> <i class="fa fa-search"></i> <input type="text" name="q" class="w3-input w3-border" placeholder="Search for any job" value='{{ request.GET.q }}'> <button type="submit" class="btn btn-primary-button">Search</button> </div>
-                </form>
+
+
+
+    <main class="cd-main-content">
+
+          <div  id="joblist" class="container">
+            <div class="row height d-flex justify-content-center align-items-center">
+                <div class="col-md-10">
+                    <form method='GET' action='{% url 'search' %}'>
+						<div class="search"> <i class="fa fa-search"></i> <input type="text" name="q" class="w3-input w3-border" placeholder="Search for any job" value='{{ request.GET.q }}'> <button type="submit" class="btn btn-primary-button">Search</button> </div>
+					</form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container py-5">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
+        <div class="card-deck p-5">
+		{% for job in jobs.all %}
+          <div class="card">
+            <img class="card-img-top" src="{{ job.job_img.url }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{ job.title }}</h5>
+              <p class="card-text">{{ job.description }}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{ job.payment }}</small>
+              <button style="margin-left: 15%;" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalCart">Apply</button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
 
-            <!-- List group-->
-            <ul class="list-group shadow">
-                {% for job in jobs.all %}
-              <!-- list group item-->
-              <li class="list-group-item">
-                <!-- Custom content-->
-                <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                  <div class="media-body order-2 order-lg-1">
-                    <h5 class="mt-0 font-weight-bold mb-2">{{ job.title }}</h5>
-                    <p class="font-italic text-muted mb-0 small">{{ job.description }}</p>
-                    <div class="d-flex align-items-center justify-content-between mt-1">
-                      <button type="button" class="btn btn-outline-danger">Apply</button>
-                      <ul class="list-inline small">
-                        <h6 class="font-weight-bold my-2">{{ job.payment }}</h6>
-                      </ul>
-                    </div>
-                  </div><img src="{{ job.job_img.url }}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                </div>
-                <!-- End -->
+
+
+
+      <div class="cd-filter">
+        <form>
+
+
+          <div class="cd-filter-block">
+            <h4 style="font-size: 90%;">Select Major(s)</h4>
+
+            <ul class="cd-filter-content cd-filters list">
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1">
+                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">Computer Science</label>
               </li>
-              <!-- End -->
-                {% endfor %}
-            </ul>
-            <!-- End -->
-          </div>
-        </div>
-      </div>
 
-      <div id="contact" style="background-color: rgb(161, 158, 158);">
-        <div class="w3-container w3-content w3-padding-64" style="max-width:800px;" id="contact">
-          <h2 class="w3-wide w3-center">CONTACT</h2>
-          <div class="w3-row w3-padding-32">
-            <div class="w3-col m6 w3-large w3-margin-bottom">
-              <i class="fa fa-map-marker" style="width:30px;"></i><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
-                <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
-              </svg></span> Naryn, KG<br>
-              <i class="fa fa-phone" style="width:30px"></i><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-              </svg></span> Phone: +00 151515<br>
-              <i class="fa fa-envelope" style="width:30px"> </i><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
-              </svg></span> Email: mail@mail.com<br>
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Communications and Media</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Economics</label>
+              </li>
+
+                <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Earth and Environmental Science</label>
+              </li>
+
+            </ul> <!-- cd-filter-content -->
+          </div> <!-- cd-filter-block -->
+
+
+
+          <div class="cd-filter-block">
+            <h4 style="font-size: 90%;">Select Payment</h4>
+
+            <ul class="cd-filter-content cd-filters list">
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter="" type="radio" name="radioButton" id="radio1" checked>
+                <label style="font-size: 90%;" class="radio-label" for="radio1">Paid</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".radio2" type="radio" name="radioButton" id="radio2">
+                <label style="font-size: 90%;" class="radio-label" for="radio2">Unpaid</label>
+              </li>
+
+            </ul> <!-- cd-filter-content -->
+          </div> <!-- cd-filter-block -->
+        </form>
+
+        <a href="#0" style="font-size: 90%;" class="cd-close"><i class="bi bi-x-lg"></i></a>
+      </div> <!-- cd-filter -->
+
+
+      <a style="font-size: 90%;" href="#0" class="cd-filter-trigger"><i class="bi bi-funnel"></i> JOB FILTER</a>
+
+    </main> <!-- cd-main-content -->
+
+    <!-- Modal: modalCart -->
+<div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <!--Header-->
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Job Application</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <!--Body-->
+    <div class="modal-body">
+
+      <table class="table table-hover">
+        <form>
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" />
+                <label class="form-label" for="form6Example1">First name</label>
+              </div>
             </div>
-            <div class="w3-col m6">
-              <form action="" target="_blank">
-                <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-                  <div class="w3-half">
-                    <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example2" class="form-control" />
+                <label class="form-label" for="form6Example2">Last name</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example3" class="form-control" />
+            <label class="form-label" for="form6Example3">Job title</label>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" id="form6Example4" class="form-control" />
+            <label class="form-label" for="form6Example4">Email</label>
+          </div>
+
+          <!-- Number input -->
+          <div class="form-outline mb-4">
+            <input type="number" id="form6Example5" class="form-control" />
+            <label class="form-label" for="form6Example5">Phone</label>
+          </div>
+
+          <!-- Message input -->
+          <div class="form-outline mb-4">
+            <textarea class="form-control" id="form6Example6" rows="4"></textarea>
+            <label class="form-label" for="form6Example6">Additional information</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example7">Upload Resume</label>
+            <input type="file" name="file">
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example8">Upload Cover letter</label>
+            <input type="file" name="file">
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example9">Upload Transcipt</label>
+            <input type="file" name="file">
+          </div>
+
+
+        </form>
+      </table>
+
+    </div>
+    <!--Footer-->
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button> -->
+      <button class="btn btn-outline-danger">Apply</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Modal: modalCart -->
+
+      <hr style="margin-top: 15%;  border-top: 1px solid;">
+          <div id="contact" style="background-color: white">
+            <div class="w3-container w3-content w3-padding-64" style="max-width:800px;" id="contact">
+              <h2 class="w3-wide w3-center">CONTACT</h2>
+              <div class="w3-row w3-padding-32">
+                <div class="w3-col m6 w3-large w3-margin-bottom">
+                  <i class="fa fa-map-marker" style="width:30px;"></i><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
+                    <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                  </svg></span> Naryn, KG<br>
+                  <i class="fa fa-phone" style="width:30px"></i><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                  </svg></span> Phone: +00 151515<br>
+                  <i class="fa fa-envelope" style="width:30px"> </i><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                  </svg></span> Email: mail@mail.com<br>
+                </div>
+                <div class="w3-col m6">
+                  <form action="" target="_blank">
+                    <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+                      <div class="w3-half">
+                        <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+                      </div>
+                      <div class="w3-half">
+                        <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                      </div>
+                    </div>
+                    <textarea class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></textarea>
+                    <button class="btn btn-primary-button w3-section w3-right" type="submit">SEND</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <hr style="border-top: 1px solid;">
+            <div class="row">
+              <div class="col-sm-6">
+                <center><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
+                  <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                </svg><h5>UCA Naryn Campus</h5></span></center>
+                <div class="card">
+                  <div class="card-body">
+                  <div class="map-responsive">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11964.675548521489!2d75.91147165!3d41.43555695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389068a0cabbb013%3A0x1f2377c460cf4da!2z0KPQvdC40LLQtdGA0YHQuNGC0LXRgiDQptC10L3RgtGA0LDQu9GM0L3QvtC5INCQ0LfQuNC4INCd0LDRgNGL0L3RgdC60LjQuSDQutCw0LzQv9GD0YE!5e0!3m2!1sru!2skg!4v1647431158414!5m2!1sru!2skg" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                   </div>
-                  <div class="w3-half">
-                    <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
                   </div>
                 </div>
-                <textarea class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></textarea>
-                <button class="btn btn-primary-button w3-section w3-right" type="submit">SEND</button>
-              </form>
+              </div>
+              <div class="col-sm-6">
+                <center><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
+                  <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                </svg><h5>UCA office, Bishkek</h5></span></center>
+                <div class="card">
+                  <div class="card-body">
+                  <div class="map-responsive">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.019876770104!2d74.59187281485126!3d42.87242461058378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7d8bb0d82b9%3A0xe2a6486c39bab7b2!2zMTM4LCAxMzgg0LrTqdGH06nRgdKvINCi0L7QutGC0L7Qs9GD0LvQsCwg0JHQuNGI0LrQtdC6IDcyMDAwMQ!5e0!3m2!1sru!2skg!4v1647432250221!5m2!1sru!2skg" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  </div>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <center><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
-              <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
-            </svg><h5>UCA Naryn Campus</h5></span></center>
-            <div class="card">
-              <div class="card-body">
-              <div class="map-responsive">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11964.675548521489!2d75.91147165!3d41.43555695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389068a0cabbb013%3A0x1f2377c460cf4da!2z0KPQvdC40LLQtdGA0YHQuNGC0LXRgiDQptC10L3RgtGA0LDQu9GM0L3QvtC5INCQ0LfQuNC4INCd0LDRgNGL0L3RgdC60LjQuSDQutCw0LzQv9GD0YE!5e0!3m2!1sru!2skg!4v1647431158414!5m2!1sru!2skg" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <center><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
-              <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
-            </svg><h5>UCA office, Bishkek</h5></span></center>
-            <div class="card">
-              <div class="card-body">
-              <div class="map-responsive">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.019876770104!2d74.59187281485126!3d42.87242461058378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7d8bb0d82b9%3A0xe2a6486c39bab7b2!2zMTM4LCAxMzgg0LrTqdGH06nRgdKvINCi0L7QutGC0L7Qs9GD0LvQsCwg0JHQuNGI0LrQtdC6IDcyMDAwMQ!5e0!3m2!1sru!2skg!4v1647432250221!5m2!1sru!2skg" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-              </div>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
 
 
 
+            <!-- Footer -->
+<footer class="page-footer font-small special-color-dark pt-4">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2022 Copyright:
+    <a href="/"> Ucentralasia.org</a>
+  </div>
+
+  <div class="footer-copyright text-center">
+    <a href="" class="me-4 text-reset">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="" class="me-4 text-reset">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="" class="me-4 text-reset">
+      <i class="fab fa-google"></i>
+    </a>
+    <a href="" class="me-4 text-reset">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="" class="me-4 text-reset">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="" class="me-4 text-reset">
+      <i class="fab fa-github"></i>
+    </a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 
-
-    <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
-    <script src="{% static 'js/popper.min.js'%}"></script>
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'js/jquery.sticky.js'%}"></script>
-    <script src="{% static 'js/main.js'%}"></script>
-  </body>
-</html>
+      <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'js/popper.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/jquery.sticky.js' %}"></script>
+      <script src="{% static 'js/main.js' %}"></script>
+    </body>
+  </html>

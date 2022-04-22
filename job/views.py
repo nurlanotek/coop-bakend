@@ -22,4 +22,7 @@ def search(request):
     results = Job.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(payment__icontains=query))
     return render(request, 'job.html', { 'jobs':results })
 
-
+def profile(request):
+    email = request.user.email
+    profile_info = Student.objects.filter(Q(email__contains=email))
+    return render(request, 'profile_page.html', {'profile_info': profile_info})

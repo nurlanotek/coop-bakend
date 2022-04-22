@@ -64,3 +64,8 @@ def save(request):
 
     return render(request,'profile_page.html', {'profile_info': profile_info})
 
+
+def profile(request):
+    email = request.user.email
+    profile_info = Student.objects.filter(Q(email__contains=email))
+    return render(request, 'profile_page.html', {'profile_info': profile_info})
