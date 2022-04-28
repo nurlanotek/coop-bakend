@@ -246,3 +246,13 @@ $(document).ready(function(){
 	MixItUp - Define a single object literal 
 	to contain all filter custom functionality
 *****************************************************/
+$(function(){
+
+    $(".dropdown-menu a").click(function(){
+
+      $(".btn:first-child").text($(this).text());
+      $(".btn:first-child").val($(this).text());
+
+   });
+
+});

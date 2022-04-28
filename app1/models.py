@@ -22,7 +22,7 @@ class Job(models.Model):
     location = models.CharField('Location',max_length=255)
     description = models.CharField('Description',max_length=5000)
     position = models.CharField('Position', max_length=255)
-    payment = models.CharField('Payment', max_length=255)
+    payment = models.CharField('Payment', max_length=255, null=True, blank=True)
     major = models.CharField('Major', max_length=255, null=True, blank=True)
     is_online = models.CharField('Online', max_length=255, null=True, blank=True)
     is_remote = models.CharField('Remote', max_length=255, null=True, blank=True)
@@ -36,3 +36,16 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
+
+class Application(models.Model):
+    job_title = models.CharField('Job Title', max_length=255)
+    application_date = models.DateField('Application Date')
+    firstname = models.CharField('First Name', max_length=255, default='')
+    lastname = models.CharField('Last Name', max_length=255, default='')
+    email = models.CharField('Email', max_length=255, default='')
+    stdid = models.CharField('StudentID', max_length=255, default='')
+    resume = models.FileField('Resume', null=True, blank=True, upload_to="resumes/")
+    cover_letter = models.FileField('Cover Letter', null=True, blank=True, upload_to="cover_letters/")
+    transcript = models.FileField('Transcript', null=True, blank=True, upload_to="transcripts/")
+
+

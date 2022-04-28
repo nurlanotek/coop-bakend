@@ -27,7 +27,6 @@
     <!-- Style -->
     <link rel="stylesheet" href="{% static  'css/style.css' %}">
 
-
     <title></title>
   </head>
   <body>
@@ -113,19 +112,109 @@
             </div>
         </div>
 
+    {% include 'partials/_messages.html' %}
+
         <div class="card-deck col-md-10 mx-auto">
 		{% for job in jobs.all %}
           <div class="card col-md-3">
             <img class="card-img-top" src="{{ job.job_img.url }}" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title">{{ job.title }}</h5>
+              <h5 class="card-title" >{{ job.title }}</h5>
               <p class="card-text">{{ job.description }}</p>
             </div>
             <div class="card-footer">
               <small class="text-muted">{{ job.payment }}</small>
-              <button style="margin-left: 15%;" type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalCart">Apply</button>
+              <button style="margin-left: 15%;"  type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal{{ job.pk }}">Apply</button>
             </div>
           </div>
+
+            <!-- Modal: modalCart -->
+<div class="modal fade" id="modal{{ job.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <!--Header-->
+      <form method='POST' action='{% url 'applyjob' %}' enctype="multipart/form-data">
+          {% csrf_token %}
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">{{ job.title }}<input type="hidden" name="job_title" value="{{ job.title }}"/>
+          </h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <!--Body-->
+    <div class="modal-body">
+
+      <table class="table table-hover">
+
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="form6Example1"><b>Start date:</b><p style="color: black;">{{ job.start }}</p></label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="form6Example2"><b>Due date:</b><p style="color: black;">{{ job.end }}</p></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example3"><b>Location:</b><p style="color: black;">{{ job.location }}
+            </p></label>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example4"><b>Restrictions:</b><p style="color: black;">{{ job.restrictions }}</p></label>
+          </div>
+
+          <!-- Number input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example5"><b>Requirements:</b>
+              {{ job.requirements }}
+            </label>
+          </div>
+
+          <!-- Message input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example6"><b>Deadline for application:</b>
+              <p style="color: black;">{{ job.deadline }}</p>
+            </label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example7">Upload Resume</label>
+            <input type="file" name="resume"/>
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example8">Upload Cover letter</label>
+            <input type="file" name="cover_letter"/>
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form6Example9">Upload Transcipt</label>
+            <input type="file" name="transcript"/>
+          </div>
+      </table>
+
+    </div>
+    <!--Footer-->
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button> -->
+      <button type="submit" class="btn btn-outline-danger">Apply</button>
+    </div>
+      </form>
+  </div>
+</div>
+</div>
+<!-- Modal: modalCart -->
+
           {% endfor %}
         </div>
 
@@ -167,18 +256,18 @@
 
             <ul class="cd-filter-content cd-filters list">
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1" name="isonline_checks[]" value="Online">
-                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">Online</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check5" type="checkbox" id="checkbox5" name="isonline_checks[]" value="Online">
+                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox5">Online</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2" name="isonline_checks[]" value="Offline">
-                <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Offline</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check6" type="checkbox" id="checkbox6" name="isonline_checks[]" value="Offline">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox6">Offline</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3" name="isonline_checks[]" value="Both">
-                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Both</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check7" type="checkbox" id="checkbox7" name="isonline_checks[]" value="Both">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox7">Both</label>
               </li>
 
             </ul> <!-- cd-filter-content -->
@@ -189,18 +278,18 @@
 
             <ul class="cd-filter-content cd-filters list">
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1" name="isremote_checks[]" value="Remote">
-                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">Remote</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check8" type="checkbox" id="checkbox8" name="isremote_checks[]" value="Remote">
+                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox8">Remote</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2" name="isremote_checks[]" value="Onsite">
-                <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Onsite</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check9" type="checkbox" id="checkbox9" name="isremote_checks[]" value="Onsite">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox9">Onsite</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3" name="isremote_checks[]" value="Both">
-                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Both</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check10" type="checkbox" id="checkbox10" name="isremote_checks[]" value="Both">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox10">Both</label>
               </li>
 
             </ul> <!-- cd-filter-content -->
@@ -211,18 +300,18 @@
 
             <ul class="cd-filter-content cd-filters list">
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1" name="language_checks[]" value="English">
-                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">English</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check11" type="checkbox" id="checkbox11" name="language_checks[]" value="English">
+                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox11">English</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2" name="language_checks[]" value="Russian">
-                <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Russian</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check12" type="checkbox" id="checkbox12" name="language_checks[]" value="Russian">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox12">Russian</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3" name="language_checks[]" value="Kyrgyz">
-                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Kyrgyz</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check13" type="checkbox" id="checkbox13" name="language_checks[]" value="Kyrgyz">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox13">Kyrgyz</label>
               </li>
 
             </ul> <!-- cd-filter-content -->
@@ -248,7 +337,7 @@
 
           </div> <!-- cd-filter-block -->
             <div>
-                <button style="position: relative; " type="submit" class="btn btn-outline-dark">Apply</button>
+                <button style="position: relative; " type="submit" class="btn btn-outline-dark">Apply Filter</button>
             </div>
             </form>
 
@@ -261,92 +350,10 @@
 
     </main> <!-- cd-main-content -->
 
-    <!-- Modal: modalCart -->
-<div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <!--Header-->
-    <div class="modal-header">
-      <h4 class="modal-title" id="myModalLabel">Job Application</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <!--Body-->
-    <div class="modal-body">
-
-      <table class="table table-hover">
-        <form>
-          <!-- 2 column grid layout with text inputs for the first and last names -->
-          <div class="row mb-4">
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example1" class="form-control" />
-                <label class="form-label" for="form6Example1">First name</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-outline">
-                <input type="text" id="form6Example2" class="form-control" />
-                <label class="form-label" for="form6Example2">Last name</label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Text input -->
-          <div class="form-outline mb-4">
-            <input type="text" id="form6Example3" class="form-control" />
-            <label class="form-label" for="form6Example3">Job title</label>
-          </div>
-
-          <!-- Email input -->
-          <div class="form-outline mb-4">
-            <input type="email" id="form6Example4" class="form-control" />
-            <label class="form-label" for="form6Example4">Email</label>
-          </div>
-
-          <!-- Number input -->
-          <div class="form-outline mb-4">
-            <input type="number" id="form6Example5" class="form-control" />
-            <label class="form-label" for="form6Example5">Phone</label>
-          </div>
-
-          <!-- Message input -->
-          <div class="form-outline mb-4">
-            <textarea class="form-control" id="form6Example6" rows="4"></textarea>
-            <label class="form-label" for="form6Example6">Additional information</label>
-          </div>
-
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form6Example7">Upload Resume</label>
-            <input type="file" name="file">
-          </div>
-
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form6Example8">Upload Cover letter</label>
-            <input type="file" name="file">
-          </div>
-
-          <div class="form-outline mb-4">
-            <label class="form-label" for="form6Example9">Upload Transcipt</label>
-            <input type="file" name="file">
-          </div>
 
 
-        </form>
-      </table>
 
-    </div>
-    <!--Footer-->
-    <div class="modal-footer">
-      <!-- <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button> -->
-      <button class="btn btn-outline-danger">Apply</button>
-    </div>
-  </div>
-</div>
-</div>
-<!-- Modal: modalCart -->
+
 
       <hr style="margin-top: 15%;  border-top: 1px solid;">
           <div id="contact" style="background-color: white">

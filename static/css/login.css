@@ -119,6 +119,27 @@ body {
         color: black; 
     }
 
+    input[type="submit"].btn.btn-primary {
+      color: #fff;
+      background: #89ba16;
+      border-color: #89ba16; }
+      .btn.btn-primary:hover {
+          background: #fff;
+          border-color: #fff;
+          color: black; 
+      }
+
+      input[type="submit"].btn.btn-primary1 {
+        margin-left: 42%;
+        color: #fff;
+        background: blue;
+        border-color: blue; }
+    .btn.btn-primary1:hover {
+        background: #fff;
+        border-color: #fff;
+        color: black; 
+    }
+
     .btn.btn-primary2 {
         width: 100%;
         color: #fff;
