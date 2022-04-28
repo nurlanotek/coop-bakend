@@ -22,6 +22,23 @@ def search(request):
     results = Job.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(payment__icontains=query))
     return render(request, 'job.html', { 'jobs':results })
 
+def applyfilter(request):
+    major = request.GET.getlist('major_checks[]')
+    is_online = request.GET.getlist('isonline_checks[]')
+    is_remote = request.GET.getlist('isremote_checks[]')
+    language = request.GET.getlist('lanuage_checks[]')
+    is_paid = request.GET['radioButton']
+
+    majors_obj = Job.objects.filter(major__in=major)
+    isonline_obj = Job.objects.filter(is_online__in=is_online)
+    isremote_obj = Job.objects.filter(is_remote__in=is_remote)
+    language_obj = Job.objects.filter(language__in=language)
+
+    results = majors_obj.union(isonline_obj, isremote_obj,language_obj)
+
+    return render(request, 'job.html', {'jobs': results})
+
+
 def profile(request):
     email = request.user.email
     profile_info = Student.objects.filter(Q(email__contains=email))

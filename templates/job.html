@@ -133,31 +133,96 @@
 
 
       <div class="cd-filter">
-        <form>
-
+        <form method='GET' action='{% url 'applyfilter' %}'>
 
           <div class="cd-filter-block">
             <h4 style="font-size: 90%;">Select Major(s)</h4>
 
             <ul class="cd-filter-content cd-filters list">
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1">
+                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1" name="major_checks[]" value="Computer Science">
                   <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">Computer Science</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2">
+                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2" name="major_checks[]" value="Communications and Media">
                 <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Communications and Media</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3">
+                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3" name="major_checks[]" value="Economics">
                 <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Economics</label>
               </li>
 
                 <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3">
-                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Earth and Environmental Science</label>
+                <input style="font-size: 90%;" class="filter" data-filter=".check4" type="checkbox" id="checkbox4" name="major_checks[]" value="Earth and Environmental Science">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox4">Earth and Environmental Science</label>
+              </li>
+
+            </ul> <!-- cd-filter-content -->
+          </div> <!-- cd-filter-block -->
+
+            <div class="cd-filter-block">
+            <h4 style="font-size: 90%;">Online/Offline(s)</h4>
+
+            <ul class="cd-filter-content cd-filters list">
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1" name="isonline_checks[]" value="Online">
+                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">Online</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2" name="isonline_checks[]" value="Offline">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Offline</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3" name="isonline_checks[]" value="Both">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Both</label>
+              </li>
+
+            </ul> <!-- cd-filter-content -->
+          </div> <!-- cd-filter-block -->
+
+    <div class="cd-filter-block">
+            <h4 style="font-size: 90%;">Remote/Onsite(s)</h4>
+
+            <ul class="cd-filter-content cd-filters list">
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1" name="isremote_checks[]" value="Remote">
+                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">Remote</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2" name="isremote_checks[]" value="Onsite">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Onsite</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3" name="isremote_checks[]" value="Both">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Both</label>
+              </li>
+
+            </ul> <!-- cd-filter-content -->
+          </div> <!-- cd-filter-block -->
+
+    <div class="cd-filter-block">
+            <h4 style="font-size: 90%;">Language Requirements(s)</h4>
+
+            <ul class="cd-filter-content cd-filters list">
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check1" type="checkbox" id="checkbox1" name="language_checks[]" value="English">
+                  <label style="font-size: 90%;" class="checkbox-label" for="checkbox1">English</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check2" type="checkbox" id="checkbox2" name="language_checks[]" value="Russian">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox2">Russian</label>
+              </li>
+
+              <li>
+                <input style="font-size: 90%;" class="filter" data-filter=".check3" type="checkbox" id="checkbox3" name="language_checks[]" value="Kyrgyz">
+                <label style="font-size: 90%;" class="checkbox-label" for="checkbox3">Kyrgyz</label>
               </li>
 
             </ul> <!-- cd-filter-content -->
@@ -170,20 +235,25 @@
 
             <ul class="cd-filter-content cd-filters list">
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter="" type="radio" name="radioButton" id="radio1" checked>
+                <input style="font-size: 90%;" class="filter" data-filter="" type="radio" name="radioButton" id="radio1" value="Paid" checked>
                 <label style="font-size: 90%;" class="radio-label" for="radio1">Paid</label>
               </li>
 
               <li>
-                <input style="font-size: 90%;" class="filter" data-filter=".radio2" type="radio" name="radioButton" id="radio2">
+                <input style="font-size: 90%;" class="filter" data-filter=".radio2" type="radio" name="radioButton" id="radio2" value="Unpaid">
                 <label style="font-size: 90%;" class="radio-label" for="radio2">Unpaid</label>
               </li>
 
             </ul> <!-- cd-filter-content -->
+
           </div> <!-- cd-filter-block -->
-        </form>
+            <div>
+                <button style="position: relative; " type="submit" class="btn btn-outline-dark">Apply</button>
+            </div>
+            </form>
 
         <a href="#0" style="font-size: 90%;" class="cd-close"><i class="bi bi-x-lg"></i></a>
+
       </div> <!-- cd-filter -->
 
 

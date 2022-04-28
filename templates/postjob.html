@@ -102,63 +102,131 @@
             <form accept-charset="UTF-8" action="{% url 'addjob' %}" method="POST" enctype="multipart/form-data" target="_blank">
                 {% csrf_token %}
               <div class="form-group">
-                <label for="exampleInputTitle">Job Title</label>
+                  <label for="exampleInputTitle"><b>Job Title</b></label>
                 <input type="text" name="title" class="form-control" id="exampleInputTitle" placeholder="Enter job title" required="required">
               </div>
 
               <div class="form-group">
-                <label for="exampleInputLocation" required="required">Job location</label>
+                  <label for="exampleInputLocation" required="required"><b>Job location</b></label>
                 <input type="text" name="location" class="form-control" id="exampleInputLocation" placeholder="Enter job location">
               </div>
 
               <div class="form-group">
-                <label for="inputDescription">Company description</label>
+                  <label for="inputDescription"><b>Job description</b></label>
                 <textarea rows="5" type="text" name="description" class="form-control" id="inputDescription" placeholder="Enter description"></textarea>
               </div>
 
               <div class="form-group">
-                <label for="exampleInputPosition" required="required">Job position</label>
+                  <label for="exampleInputPosition" required="required"><b>Job position</b></label>
                 <input type="text" name="position" class="form-control" id="exampleInputPosition" placeholder="Enter job positions available">
               </div>
 
               <div class="form-group">
-                <label for="exampleInputPayment" required="required">Payment</label>
+                  <label for="exampleInputPayment" required="required"><b>Payment</b></label>
                 <input type="text" name="payment" class="form-control" id="exampleInputPayment" placeholder="Enter job payment">
               </div>
 
+                <div class="form-group">
+                <label for="exampleInputPayment" required="required"><b>Major</b></label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="major_checks[]" type="checkbox" id="inlineCheckbox1" value="Computer Science">
+                  <label class="form-check-label" for="inlineCheckbox1">Computer Science</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="major_checks[]" type="checkbox" id="inlineCheckbox2" value="Communications and Media">
+                  <label class="form-check-label" for="inlineCheckbox2">Communications and Media</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="major_checks[]" type="checkbox" id="inlineCheckbox3" value="Economics">
+                  <label class="form-check-label" for="inlineCheckbox3">Economics</label>
+                </div>
+                    <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="major_checks[]" type="checkbox" id="inlineCheckbox4" value="Earth and Environmental Science">
+                  <label class="form-check-label" for="inlineCheckbox4">Earth and Environmental Science</label>
+                </div>
+              </div>
+
               <div class="form-group">
-                <label for="example-date-input">Start Date</label>
+                <label for="exampleInputPayment" required="required"><b>Online/Offline</b></label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Online">
+                  <label class="form-check-label" for="inlineRadio1">Online</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Offline">
+                  <label class="form-check-label" for="inlineRadio2">Offline</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Both">
+                  <label class="form-check-label" for="inlineRadio2">Both</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputPayment" required="required"><b>Remote/Onsite</b></label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4" value="Remote">
+                  <label class="form-check-label" for="inlineRadio1">Remote</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio5" value="Onsite">
+                  <label class="form-check-label" for="inlineRadio2">Onsite</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio6" value="Both">
+                  <label class="form-check-label" for="inlineRadio2">Both</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputPayment" required="required"><b>Languages required</b></label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="lang_checks[]" type="checkbox" id="inlineCheckbox1" value="English">
+                  <label class="form-check-label" for="inlineCheckbox1">English</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="lang_checks[]" type="checkbox" id="inlineCheckbox2" value="Kyrgyz">
+                  <label class="form-check-label" for="inlineCheckbox2">Kyrgyz</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="lang_checks[]" type="checkbox" id="inlineCheckbox1" value="Russian">
+                  <label class="form-check-label" for="inlineCheckbox1">Russian</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="example-date-input"><b>Start Date</b></label>
                 <div class="col-14">
                   <input class="form-control" name="starting_date" type="date" value="2020-02-01" id="example-date-input">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="example-date-input">Due Date</label>
+                  <label for="example-date-input"><b>End Date</b></label>
                 <div class="col-14">
                   <input class="form-control" name="finishing_date" type="date" value="2020-02-01" id="example-date-input">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="inputRestrictions">Restrictions</label>
+                  <label for="inputRestrictions"><b>Restrictions</b></label>
                 <textarea rows="5" type="text" name="restrictions" class="form-control" id="inputRestrictions" placeholder="Enter restrictions"></textarea>
               </div>
 
               <div class="form-group">
-                <label for="inputRequirements">Requirements</label>
+                  <label for="inputRequirements"><b>Requirements</b></label>
                 <textarea rows="5" type="text" name="requirements" class="form-control" id="inputRequirements" placeholder="Enter requirements"></textarea>
               </div>
 
               <div class="form-group">
-                <label for="example-date-input">Deadline</label>
+                  <label for="example-date-input"><b>Deadline</b></label>
                 <div class="col-14">
                   <input class="form-control" name="deadline" type="date" value="2020-02-01" id="example-date-input">
                 </div>
               </div>
 
               <div class="form-group mt-3">
-                <label class="mr-4">Upload job image:</label>
+                  <label class="mr-4"><b>Upload job image:</b></label>
                 <input type="file" accept=".gif,.jpg,.jpeg,.png" name="job_image">
               </div>
 

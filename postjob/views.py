@@ -34,8 +34,22 @@ def addjob(request):
         deadline = request.POST['deadline']
         job_image = request.FILES['job_image']
 
-        posting = Job(title=title,location=location,description=description,position=position,payment=payment,start=starting_date,
-                      end=finishing_date,restrictions=restrictions,requirements=requirements,deadline=deadline,job_img=job_image)
+        major = request.POST.getlist('major_checks[]')
+        is_online = request.POST['inlineRadioOptions']
+        is_remote = request.POST['inlineRadioOptions1']
+        languages = request.POST.getlist('lang_checks[]')
+
+        major = ' '.join([str(elem) for elem in major])
+        languages = ' '.join([str(elem) for elem in languages])
+
+
+        print(major)
+        print(is_online)
+        print(is_remote)
+        print(languages)
+
+        posting = Job(title=title,location=location,description=description,position=position,payment=payment,major=major, is_online=is_online, is_remote=is_remote,
+                      language=languages,start=starting_date,end=finishing_date,restrictions=restrictions,requirements=requirements,deadline=deadline,job_img=job_image)
         posting.save()
 
         success_message = 'job posted successfully'
