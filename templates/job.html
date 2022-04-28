@@ -113,9 +113,9 @@
             </div>
         </div>
 
-        <div class="card-deck p-5">
+        <div class="card-deck col-md-10 mx-auto">
 		{% for job in jobs.all %}
-          <div class="card">
+          <div class="card col-md-3">
             <img class="card-img-top" src="{{ job.job_img.url }}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{ job.title }}</h5>
